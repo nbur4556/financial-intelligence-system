@@ -5,16 +5,23 @@ import re
 import os
 
 # Configuration
-# TODO: These should be in an environment variable
-DB_PATH = '/home/nbur4556/files/development/repositories/financial-intelligence-system/finance.db'
-SCHEMA_PATH = '/home/nbur4556/files/development/repositories/financial-intelligence-system/schema.sql'
-RAW_DATA_DIR = '/home/nbur4556/files/development/repositories/financial-intelligence-system/raw_exports'
+DB_PATH = ""
+SCHEMA_PATH = ""
+RAW_DATA_DIR = ""
+
+def load_environment():
+    global DB_PATH
+    global SCHEMA_PATH
+    global RAW_DATA_DIR
+
+    load_dotenv()
+
+    DB_PATH = os.getenv("DB_PATH", "")
+    SCHEMA_PATH = os.getenv("SCHEMA_PATH", "")
+    RAW_DATA_DIR = os.getenv("RAW_DATA_DIR", "")
+    print("Environment loaded")
 
 def init_db():
-    print(os.getenv("DB_PATH"))
-    print(os.getenv("SCHEMA_PATH"))
-    print(os.getenv("RAW_DATA_DIR"))
-
     with open(SCHEMA_PATH, 'r') as f:
         sql = f.read()
     
@@ -116,7 +123,7 @@ def report_gaps():
     print(f"Total unknown: {len(gaps)}")
 
 if __name__ == "__main__":
-    load_dotenv()
+    load_environment()
     init_db()
     process_csvs()
     report_gaps()
