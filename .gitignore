@@ -1,0 +1,6 @@
+# Financial Data - DO NOT COMMIT
+*.db
+*.sqlite
+raw_exports/
+.env
+.ipynb_checkpoints/
