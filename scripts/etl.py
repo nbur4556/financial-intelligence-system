@@ -20,6 +20,8 @@ def init_db():
     conn.close()
     print(f"Database initialized at {DB_PATH}")
 
+#TODO: This helps a bit, but it's not great...
+#TODO: White space should be removed
 def clean_merchant_name(description):
     """
     Strips noise from bank descriptions.
@@ -53,6 +55,7 @@ def clean_merchant_name(description):
     # In a real scenario, we'd refine this regex.
     return text
 
+#TODO: Why do we have a date AND a transaction date?
 def process_csvs():
     """Load CSVs from raw_exports and insert into SQLite."""
     conn = sqlite3.connect(DB_PATH)
