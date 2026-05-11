@@ -9,7 +9,6 @@ SCHEMA_PATH = '/home/claw/financial-planning/schema.sql'
 RAW_DATA_DIR = '/home/claw/financial-planning/raw_exports'
 
 def init_db():
-    """Initialize the database using the schema file."""
     with open(SCHEMA_PATH, 'r') as f:
         sql = f.read()
     
@@ -23,9 +22,6 @@ def init_db():
 def clean_merchant_name(description):
     """
     Strips noise from bank descriptions.
-    Examples:
-    'Withdrawal Debit SQ *THE FAINTING GOAT C Franklin TN Date 05/10/26 69 5814 Card 7453' -> 'THE FAINTING GOAT'
-    'Withdrawal POS # TARGET T-1983 780 Old Hickory Blvd Brentwood TN Card 4713' -> 'TARGET'
     """
     if not description:
         return "Unknown"
