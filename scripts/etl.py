@@ -68,6 +68,7 @@ def clean_merchant_name(description):
     return text
 
 #TODO: Why do we have a date AND a transaction date?
+#TODO: Data is duplicated when run multiple times
 def process_csvs():
     """Load CSVs from raw_exports and insert into SQLite."""
     conn = sqlite3.connect(DB_PATH)
