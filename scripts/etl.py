@@ -4,9 +4,10 @@ import re
 import os
 
 # Configuration
-DB_PATH = '/home/claw/financial-planning/finance.db'
-SCHEMA_PATH = '/home/claw/financial-planning/schema.sql'
-RAW_DATA_DIR = '/home/claw/financial-planning/raw_exports'
+# TODO: These should be in an environment variable
+DB_PATH = '/home/nbur4556/files/development/repositories/financial-intelligence-system/finance.db'
+SCHEMA_PATH = '/home/nbur4556/files/development/repositories/financial-intelligence-system/schema.sql'
+RAW_DATA_DIR = '/home/nbur4556/files/development/repositories/financial-intelligence-system/raw_exports'
 
 def init_db():
     with open(SCHEMA_PATH, 'r') as f:
