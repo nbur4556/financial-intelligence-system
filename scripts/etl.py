@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import pandas as pd
 import sqlite3
 import re
@@ -10,6 +11,10 @@ SCHEMA_PATH = '/home/nbur4556/files/development/repositories/financial-intellige
 RAW_DATA_DIR = '/home/nbur4556/files/development/repositories/financial-intelligence-system/raw_exports'
 
 def init_db():
+    print(os.getenv("DB_PATH"))
+    print(os.getenv("SCHEMA_PATH"))
+    print(os.getenv("RAW_DATA_DIR"))
+
     with open(SCHEMA_PATH, 'r') as f:
         sql = f.read()
     
@@ -111,6 +116,7 @@ def report_gaps():
     print(f"Total unknown: {len(gaps)}")
 
 if __name__ == "__main__":
+    load_dotenv()
     init_db()
     process_csvs()
     report_gaps()
