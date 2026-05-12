@@ -3,6 +3,7 @@ import sqlite3
 import os
 from scripts.etl import clean_merchant_name
 
+# TODO: tests should use sample data, not real exported data
 # TODO: locate and fix failing tests
 class TestETL(unittest.TestCase):
     def setUp(self):
