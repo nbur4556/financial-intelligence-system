@@ -6,20 +6,17 @@ import os
 
 # Configuration
 DB_PATH = ""
-SCHEMA_PATH = ""
-RAW_DATA_DIR = ""
+SCHEMA_PATH = os.path.join(os.path.dirname(__file__), "../schema.sql")
+RAW_DATA_DIR = os.path.join(os.path.dirname(__file__), "../raw_exports")
 
 def load_environment():
     global DB_PATH
-    global SCHEMA_PATH
-    global RAW_DATA_DIR
 
     load_dotenv()
 
     DB_PATH = os.getenv("DB_PATH", "")
-    SCHEMA_PATH = os.getenv("SCHEMA_PATH", "")
-    RAW_DATA_DIR = os.getenv("RAW_DATA_DIR", "")
     print("Environment loaded")
+    print("Relative os files")
 
 def init_db():
     with open(SCHEMA_PATH, 'r') as f:
