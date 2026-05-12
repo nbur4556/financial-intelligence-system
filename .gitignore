@@ -1,6 +1,8 @@
 # Financial Data - DO NOT COMMIT
+.ipynb_checkpoints/
+raw_exports/
+
+__pycache__
 *.db
 *.sqlite
-raw_exports/
 .env
-.ipynb_checkpoints/
