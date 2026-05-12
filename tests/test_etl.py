@@ -4,6 +4,7 @@ import os
 import pandas as pd
 from scripts.etl import clean_merchant_name
 
+# TODO: locate and fix failing tests
 class TestETL(unittest.TestCase):
     def setUp(self):
         self.db_path = "test_finance.db"
