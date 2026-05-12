@@ -1,7 +1,6 @@
 import unittest
 import sqlite3
 import os
-import pandas as pd
 from scripts.etl import clean_merchant_name
 
 # TODO: locate and fix failing tests
