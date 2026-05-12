@@ -1,15 +1,24 @@
+from dotenv import load_dotenv
 import pandas as pd
 import sqlite3
 import re
 import os
 
 # Configuration
-DB_PATH = '/home/claw/financial-planning/finance.db'
-SCHEMA_PATH = '/home/claw/financial-planning/schema.sql'
-RAW_DATA_DIR = '/home/claw/financial-planning/raw_exports'
+DB_PATH = ""
+SCHEMA_PATH = os.path.join(os.path.dirname(__file__), "../schema.sql")
+RAW_DATA_DIR = os.path.join(os.path.dirname(__file__), "../raw_exports")
+
+def load_environment():
+    global DB_PATH
+
+    load_dotenv()
+
+    DB_PATH = os.getenv("DB_PATH", "")
+    print("Environment loaded")
+    print("Relative os files")
 
 def init_db():
-    """Initialize the database using the schema file."""
     with open(SCHEMA_PATH, 'r') as f:
         sql = f.read()
     
@@ -20,12 +29,11 @@ def init_db():
     conn.close()
     print(f"Database initialized at {DB_PATH}")
 
+#TODO: This helps a bit, but it's not great...
+#TODO: White space should be removed
 def clean_merchant_name(description):
     """
     Strips noise from bank descriptions.
-    Examples:
-    'Withdrawal Debit SQ *THE FAINTING GOAT C Franklin TN Date 05/10/26 69 5814 Card 7453' -> 'THE FAINTING GOAT'
-    'Withdrawal POS # TARGET T-1983 780 Old Hickory Blvd Brentwood TN Card 4713' -> 'TARGET'
     """
     if not description:
         return "Unknown"
@@ -56,6 +64,8 @@ def clean_merchant_name(description):
     # In a real scenario, we'd refine this regex.
     return text
 
+#TODO: Why do we have a date AND a transaction date?
+#TODO: Data is duplicated when run multiple times
 def process_csvs():
     """Load CSVs from raw_exports and insert into SQLite."""
     conn = sqlite3.connect(DB_PATH)
@@ -111,6 +121,7 @@ def report_gaps():
     print(f"Total unknown: {len(gaps)}")
 
 if __name__ == "__main__":
+    load_environment()
     init_db()
     process_csvs()
     report_gaps()
