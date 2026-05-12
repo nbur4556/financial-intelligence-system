@@ -15,8 +15,6 @@ def load_environment():
     load_dotenv()
 
     DB_PATH = os.getenv("DB_PATH", "")
-    print("Environment loaded")
-    print("Relative os files")
 
 def init_db():
     with open(SCHEMA_PATH, 'r') as f:
