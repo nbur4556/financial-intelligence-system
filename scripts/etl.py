@@ -87,12 +87,13 @@ def process_csvs():
         for _, row in df.iterrows():
             raw_desc = str(row['Description'])
             clean_name = clean_merchant_name(raw_desc)
+            tx_id = str(row['Transaction ID'])
             
             # We insert into transactions. 
-            # The relational link to merchants_mapping is handled by the merchant_name.
+            # Use INSERT OR IGNORE to prevent duplicates based on transaction_id
             cursor.execute(
-                "INSERT INTO transactions (date, merchant_name, amount, description, source_file) VALUES (?, ?, ?, ?, ?)",
-                (row['Posting Date'], clean_name, row['Amount'], raw_desc, file)
+                "INSERT OR IGNORE INTO transactions (transaction_id, date, merchant_name, amount, description, source_file) VALUES (?, ?, ?, ?, ?, ?)",
+                (tx_id, row['Posting Date'], clean_name, row['Amount'], raw_desc, file)
             )
             
     conn.commit()
