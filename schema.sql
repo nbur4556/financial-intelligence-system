@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS merchants_mapping (
 
 -- Table for Raw Transactions
 CREATE TABLE IF NOT EXISTS transactions (
-    transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    transaction_id TEXT UNIQUE NOT NULL,
     date TEXT NOT NULL,
     merchant_name TEXT NOT NULL,
     amount REAL NOT NULL,
